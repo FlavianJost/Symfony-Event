@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Homepage{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+
+        <div class="p-5 mb-5 bg-white rounded shadow-sm text-center">
+            <h1 class="display-4 mb-3">
+                🎉 Organisez. Participez. Partagez.
+            </h1>
+
+            <p class="lead text-muted mb-4">
+                Créez des événements, gérez les inscriptions et simplifiez
+                l'organisation de vos activités.
+            </p>
+
+            #
+            Voir les événements
+            </a>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h3>📅</h3>
+                        <h5 class="card-title mt-3">
+                            Créez vos événements
+                        </h5>
+                        <p class="card-text text-muted">
+                            Planifiez facilement des événements publics ou privés.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h3>✅</h3>
+                        <h5 class="card-title mt-3">
+                            Gérez les participants
+                        </h5>
+                        <p class="card-text text-muted">
+                            Inscriptions, annulations et listes d'attente en quelques clics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h3>🤝</h3>
+                        <h5 class="card-title mt-3">
+                            Rassemblez votre communauté
+                        </h5>
+                        <p class="card-text text-muted">
+                            Favorisez les échanges autour de vos événements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-5">
+            <h2 class="mb-4">Prochains événements</h2>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <p class="text-muted mb-0">
+                        Aucun événement à afficher pour le moment.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
