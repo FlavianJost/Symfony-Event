@@ -1,8 +1,0 @@
-108af7,127.0.0.1,GET,http://symfony.local/,1790692560,,404,request
-6e7a00,127.0.0.1,GET,http://symfony.local/,1790693449,ab7b8a,404,request
-ab7b8a,127.0.0.1,GET,http://symfony.local/,1790693449,,404,request
-41c431,127.0.0.1,GET,http://symfony.local/,1790693457,,404,request
-0d5a17,127.0.0.1,GET,http://symfony.local/,1790693471,c75b4e,404,request
-c75b4e,127.0.0.1,GET,http://symfony.local/,1790693471,,404,request
-203757,127.0.0.1,GET,http://symfony.local/,1790693516,,404,request
-8ae083,127.0.0.1,GET,http://symfony.local/,1790756257,,404,request
