@@ -1,0 +1,853 @@
+/* Forms
+/* ------------------------------------------------------------------------- */
+
+input[disabled] {
+    cursor: not-allowed;
+}
+
+.form-inline {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+/* Base form groups */
+.form-group {
+    padding: 0 0 var(--ea-sp-12);
+}
+
+.form-group label,
+.form-group legend.col-form-label {
+    color: var(--form-label-color);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+    padding: 0 0 var(--ea-sp-4) 0;
+}
+
+.form-check .form-check-input {
+    border-color: var(--form-type-check-input-border-color);
+    block-size: 15px;
+    inline-size: 15px;
+}
+.form-check:not(.form-switch) .form-check-input:not(:checked) {
+    background-color: unset;
+}
+/* Used in checkbox and radio buttons */
+label.form-check-label {
+    cursor: pointer;
+    font-weight: var(--font-weight-normal);
+}
+.form-group label.form-check-label.required:after {
+    display: none;
+}
+.form-widget .form-check + .form-check {
+    margin-block-start: var(--ea-sp-2);
+}
+
+.form-group label.required:after,
+.form-group .col-form-label.required:after {
+    background: var(--color-danger);
+    border-radius: var(--border-radius-full);
+    content: "";
+    display: inline-block;
+    filter: opacity(75%);
+    position: relative;
+    inset-inline-end: calc(-1 * var(--ea-sp-1));
+    inset-block-start: calc(-1 * var(--ea-sp-4));
+    z-index: var(--zindex-700);
+    block-size: 4px;
+    inline-size: 4px;
+}
+
+/* Form widgets (inputs, selects, etc.) */
+.form-widget .form-help {
+    color: var(--form-help-color);
+    display: block;
+    font-size: var(--font-size-sm);
+    margin-block-start: var(--ea-sp-2);
+    transition: color var(--ea-duration-slower) var(--ea-ease-in-out);
+}
+.form-widget:focus-within .form-help {
+    color: var(--form-help-active-color);
+}
+
+.form-widget input.form-control,
+.form-widget textarea.form-control,
+.form-widget .form-select {
+    background-color: var(--form-control-bg);
+    background-repeat: no-repeat; /* see https://github.com/EasyCorp/EasyAdminBundle/issues/5197 */
+    border: var(--border-width) solid var(--form-input-border-color);
+    box-shadow: var(--form-input-shadow);
+    color: var(--form-input-text-color);
+    font-size: var(--font-size-base);
+    block-size: 30px;
+    padding: var(--ea-sp-2) var(--ea-sp-4) var(--ea-sp-2);
+    white-space: nowrap;
+    word-break: keep-all;
+    transition: box-shadow var(--ea-duration-fast) var(--ea-ease-in), color var(--ea-duration-fast) var(--ea-ease-in);
+}
+.form-widget input.form-control.is-invalid,
+.form-widget textarea.form-control.is-invalid,
+.form-widget .form-select.is-invalid,
+.field-collection-item.field-collection-item-complex.is-invalid,
+.form-widget input.form-control.is-invalid:focus,
+.form-widget textarea.form-control.is-invalid:focus,
+.form-widget .form-select.is-invalid:focus,
+.field-collection-item.field-collection-item-complex.is-invalid:focus {
+    background-image: none;
+    border: var(--border-width) solid var(--form-input-error-border-color);
+    box-shadow: var(--form-input-error-shadow);
+}
+.form-widget input.form-check-input.is-invalid {
+    border: var(--border-width) solid var(--form-input-error-border-color);
+    box-shadow: var(--form-input-error-shadow);
+}
+
+.form-widget .form-control:disabled,
+.form-widget .form-control[readonly],
+.form-widget .form-select:disabled,
+.form-widget .form-select[readonly] {
+    background-color: var(--form-control-disabled-bg);
+    border-color: var(--form-input-border-color) !important;
+    box-shadow: none !important;
+    color: var(--form-control-disabled-color);
+    cursor: not-allowed;
+}
+body.ea-dark-scheme .form-widget .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23adb5bd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-widget .form-select[multiple] {
+    block-size: auto;
+    background-image: none;
+    padding: 0;
+}
+.form-widget input.form-check-input {
+    border: var(--border-width) solid var(--form-type-check-input-border-color);
+    box-shadow: var(--form-type-check-input-box-shadow);
+}
+.form-widget input.form-control:focus,
+.form-widget textarea.form-control:focus,
+.form-widget .form-select:focus,
+.form-widget input.form-check-input:focus {
+    border-color: var(--form-input-hover-border-color);
+    box-shadow: var(--form-input-hover-shadow);
+    outline: 0;
+}
+.form-check-input:checked {
+    background-color: var(--form-type-check-input-checked-bg);
+}
+.form-check-input:focus {
+    box-shadow: var(--form-input-hover-shadow);
+}
+
+.form-widget input.form-control[data-ea-align="right"] {
+    text-align: right;
+}
+.form-widget input.form-control.is-invalid[data-ea-align="right"] {
+    padding-inline-end: var(--ea-sp-16);
+}
+
+.form-widget textarea.form-control {
+    block-size: auto;
+    line-height: var(--line-height-relaxed);
+    white-space: pre-wrap;
+}
+
+.form-widget .form-select {
+    background-position: right 5px center;
+    padding: var(--ea-sp-2) var(--ea-sp-14) var(--ea-sp-2) var(--ea-sp-4);
+}
+.ts-dropdown.form-select {
+    block-size: auto;
+}
+
+/* Checkbox widgets */
+.form-widget .form-check {
+    margin: 0;
+    padding: 0;
+}
+label.form-check-label {
+    margin: 0;
+    padding-inline-start: var(--ea-sp-2);
+}
+.form-check .form-check-input {
+    float: none;
+    margin-inline-start: 0;
+    margin-block-start: var(--ea-sp-1);
+}
+.form-check-inline + .form-check-inline {
+    margin-inline-start: var(--ea-sp-8);
+}
+
+/* Date-time widgets */
+.field-date .form-widget,
+.field-time .form-widget,
+.field-datetime .form-widget {
+    margin: 0;
+}
+
+.datetime-widget select,
+.datetime-widget .input-group > .form-select {
+    min-inline-size: max-content;
+    -webkit-appearance: none; /* needed for Safari */
+}
+.datetime-widget + .datetime-widget {
+    margin-inline-start: var(--ea-sp-5);
+}
+
+.datetime-widget select + select {
+    margin-inline-start: var(--ea-sp-2);
+}
+
+.datetime-widget-time select {
+    margin: 0 0 0 var(--ea-sp-1);
+}
+.datetime-widget-time select:first-child {
+    margin-inline-start: 0;
+}
+.datetime-widget-time select:last-child {
+    margin-inline-end: 0;
+}
+
+/* Utilities to create common form fields (long, short, etc.) */
+.short .form-widget {
+    flex: 0 0 20% !important;
+}
+
+.long .form-control,
+.large .form-control {
+    max-inline-size: unset !important;
+}
+
+.large .input.form-control {
+    font-size: var(--font-size-xl) !important;
+}
+
+.large textarea.form-control {
+    block-size: 500px;
+    max-inline-size: unset !important;
+}
+
+.code input.form-control,
+.code textarea.form-control {
+    font-family: var(--font-family-monospace) !important;
+}
+
+.field-group .long .form-control,
+.field-group .large .form-control {
+    flex: 0 0 100% !important;
+    max-inline-size: unset !important;
+}
+
+.field-group .large textarea.form-control {
+    flex: 0 0 100% !important;
+    block-size: 500px;
+    max-inline-size: unset !important;
+}
+
+/* Form columns */
+/* the gap between columns of fieldset cards matches their vertical stacking
+   gap (see .field-form_fieldset below), for a uniform grid between cards;
+   rows inside the cards keep the default gutter. The gap between wrapped
+   column lines uses row-gap instead of the last card's margin, so it survives
+   fieldsets whose css classes were replaced with setCssClass() */
+.row:has(> .form-column) {
+    --bs-gutter-x: var(--ea-sp-10);
+    row-gap: var(--ea-sp-10);
+}
+
+/* columns in the same row stretch to equal height (Bootstrap flex default);
+   the last fieldset card of each column grows to fill the leftover space so
+   all columns end flush at the bottom */
+.form-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-column > .form-fieldset:last-child {
+    flex-grow: 1;
+    margin-block-end: 0;
+}
+
+.form-column .form-column-title {
+    display: flex;
+    flex-direction: column;
+    margin-block-end: var(--ea-sp-8);
+}
+.form-column .form-column-title .form-column-title-content {
+    align-items: center;
+    display: flex;
+    color: var(--form-column-header-color);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    padding: 0 0 var(--ea-sp-1);
+}
+
+.form-column .form-column-title .form-column-icon {
+    color: var(--form-column-icon-color);
+    margin-inline-end: var(--ea-sp-5);
+}
+
+.form-column .form-column-title .form-column-help {
+    color: var(--form-column-help-color);
+    flex: 1;
+    margin: 0;
+}
+.form-column .field-form_fieldset {
+    margin-block-end: var(--ea-sp-10);
+}
+
+/* modeled on the shadcn/ui Card component: one spacing value drives the
+   padding of every card section and the gap between them (like shadcn's
+   --card-spacing); the bottom padding comes from the last .form-group's own
+   block-end padding, which equals this same value */
+.form-column .form-fieldset {
+    --form-fieldset-spacing: var(--ea-sp-12);
+
+    border-radius: var(--border-radius-lg);
+    box-shadow: inset 0 0 0 1px var(--form-fieldset-border-color);
+}
+
+.form-column .form-fieldset-header {
+    box-shadow: none;
+    padding: var(--form-fieldset-spacing) var(--form-fieldset-spacing) 0;
+}
+
+.form-column .form-fieldset-header .form-fieldset-title .form-fieldset-title-content {
+    box-shadow: none;
+    padding: 0;
+}
+
+.form-column .form-fieldset-header .form-fieldset-title .form-fieldset-help {
+    margin-block-start: var(--ea-sp-2);
+}
+
+.form-column .form-fieldset-body {
+    padding: var(--form-fieldset-spacing) var(--form-fieldset-spacing) 0;
+}
+
+/* Form fieldsets */
+.field-form_fieldset {
+    margin-block-end: var(--ea-sp-18);
+}
+
+.form-section-empty {
+    padding: var(--ea-sp-12) var(--ea-sp-5) var(--ea-sp-12);
+}
+
+.form-fieldset-header {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0 0 var(--ea-sp-8);
+    position: relative;
+}
+.form-fieldset-header .form-fieldset-collapse-marker {
+    color: var(--form-fieldset-collapse-marker-color);
+    font-size: 90%;
+    margin: 0 var(--ea-sp-5) 0 var(--ea-sp-1);
+    transform: rotate(90deg);
+    transition: transform var(--ea-duration-slow) var(--ea-ease-out);
+}
+
+.form-fieldset-header .form-fieldset-title {
+    flex: 1;
+}
+.form-fieldset-header .form-fieldset-title .form-fieldset-title-content {
+    align-items: center;
+    box-shadow: 0 1px 0 var(--form-fieldset-header-border-color);
+    display: flex;
+    color: var(--form-fieldset-header-color);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    padding: 0 0 var(--ea-sp-2);
+}
+.form-fieldset-header .form-fieldset-title .form-fieldset-title-content.not-collapsible {
+    cursor: default;
+}
+.form-fieldset-header .form-fieldset-title .form-fieldset-title-content.collapsed .form-fieldset-collapse-marker {
+    transform: rotate(0deg);
+}
+.form-fieldset-header .form-fieldset-title .form-fieldset-title-content .collapsible::after {
+    content: "";
+    position: absolute;
+    inline-size: 100%;
+    block-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+}
+
+.form-fieldset-header .form-fieldset-title .form-fieldset-icon {
+    color: var(--form-fieldset-icon-color);
+    margin-inline-end: var(--ea-sp-5);
+}
+
+.form-fieldset-header .form-fieldset-title .form-fieldset-help {
+    color: var(--form-fieldset-help-color);
+    margin-block-start: var(--ea-sp-3);
+}
+
+.form-fieldset-title-content .badge-danger {
+    margin-inline-start: var(--ea-sp-4);
+}
+
+.form-column .form-fieldset.has-fieldset-error {
+    border: var(--border-width) solid var(--form-input-error-border-color);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--form-input-error-shadow);
+}
+
+/* using CSS Grid is needed for a smooth collapse animation */
+.form-fieldset-body {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows var(--ea-duration-slow) var(--ea-ease-out);
+    overflow: clip;
+}
+
+.form-fieldset-body.collapse:not(.show) {
+    display: grid;
+    grid-template-rows: 0fr;
+}
+
+.form-fieldset-body.collapsing {
+    display: grid;
+    block-size: auto !important;
+    overflow: clip;
+}
+
+.form-fieldset-body > .row {
+    min-block-size: 0;
+    overflow: clip;
+}
+
+/* allow contents (e.g. dropdowns) to overflow when fieldset is expanded;
+   use overflow-inline to prevent content from spilling into neighboring fieldsets
+   in multi-column layouts, while overflow-block lets dropdowns extend downward */
+.form-fieldset-body.show:not(.collapsing) {
+    overflow-inline: clip;
+    overflow-block: visible;
+}
+.form-fieldset-body.show:not(.collapsing) > .row {
+    overflow: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .form-fieldset-body,
+    .form-column .form-fieldset-header,
+    .form-fieldset-header .form-fieldset-collapse-marker {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Form actions ("Save changes", "Delete", etc.) */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+}
+.form-actions .btn {
+    margin-inline-start: var(--ea-sp-5);
+}
+
+/* Form errors */
+.has-error .form-help,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline,
+.has-error.radio label,
+.has-error.checkbox label,
+.has-error.radio-inline label,
+.has-error.checkbox-inline label {
+    color: var(--form-help-error-color);
+}
+
+.has-error .form-widget input.form-control,
+.has-error .form-widget textarea.form-control,
+.has-error .form-widget .form-select,
+.has-error .form-widget input.form-check-input,
+.has-error .ea-fileupload .input-group,
+.has-error .btn.input-file-container,
+.has-error .CodeMirror,
+.has-error.ea-text-editor-wrapper,
+.has-error.form-group .ea-text-editor-wrapper {
+    border-color: var(--form-input-error-border-color);
+    box-shadow: var(--form-input-error-shadow);
+}
+.form-group.has-error label,
+.form-group.has-error legend {
+    color: var(--form-input-error-legend-color);
+}
+
+.has-error .ea-fileupload .input-group {
+    border-radius: var(--border-radius);
+}
+
+.global-invalid-feedback {
+    background: var(--form-global-error-bg);
+    border: var(--form-global-error-border);
+    border-radius: var(--border-radius);
+    color: var(--form-global-error-color);
+    font-size: var(--font-size-base);
+    margin: var(--ea-sp-2) 0;
+    padding: var(--ea-sp-3) var(--ea-sp-6);
+}
+form .invalid-feedback {
+    color: var(--color-danger);
+    font-size: 1em;
+    font-weight: var(--font-weight-medium);
+    padding-block-start: var(--ea-sp-3);
+}
+.form-check-input.is-invalid ~ .form-check-label,
+.was-validated .form-check-input:not([type="checkbox"]):invalid ~ .form-check-label {
+    color: inherit;
+}
+
+form .invalid-feedback .badge-danger {
+    font-size: var(--font-size-xs);
+    margin-inline-end: var(--ea-sp-1);
+    padding: var(--ea-sp-2) var(--ea-sp-2);
+}
+form .invalid-feedback > .d-block + .d-block {
+    margin-block-start: var(--ea-sp-2);
+}
+
+/* Form group inputs */
+.input-group-text {
+    background-color: var(--form-input-group-text-bg);
+    border: var(--border-width) solid var(--form-input-group-text-border-color);
+    box-shadow: var(--form-input-box-shadow);
+    color: var(--form-input-text-color);
+    block-size: 30px;
+    font-size: var(--font-size-base);
+    padding: var(--ea-sp-2) var(--ea-sp-5) var(--ea-sp-2);
+}
+
+/* Input addons created with the field prepend()/append() methods:
+   a single border around the whole group, a borderless input inside it,
+   and the focus ring applied to the group instead of the input */
+.form-widget .ea-input-group {
+    align-items: center;
+    background-color: var(--form-control-bg);
+    border: var(--border-width) solid var(--form-input-border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--form-input-shadow);
+    display: flex;
+    block-size: 30px;
+    transition: box-shadow var(--ea-duration-fast) var(--ea-ease-in);
+}
+.form-widget .ea-input-group:focus-within {
+    border-color: var(--form-input-hover-border-color);
+    box-shadow: var(--form-input-hover-shadow);
+}
+.form-widget .ea-input-group .ea-input-addon {
+    align-items: center;
+    color: var(--form-input-addon-color);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: var(--font-size-base);
+    gap: var(--ea-sp-2);
+    white-space: nowrap;
+}
+/* the global 'span.icon' styles align icons to the text baseline, which
+   renders them a couple of pixels too low inside the flex addon container */
+.form-widget .ea-input-group .ea-input-addon .icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+}
+/* the input's own inline padding provides the gap between it and the addons */
+.form-widget .ea-input-group .ea-input-addon-prepend {
+    padding-inline-start: var(--ea-sp-4);
+}
+.form-widget .ea-input-group .ea-input-addon-append {
+    padding-inline-end: var(--ea-sp-4);
+}
+.form-widget .ea-input-group .ea-input-addon-prepend + .ea-input-addon-prepend {
+    padding-inline-start: var(--ea-sp-3);
+}
+.form-widget .ea-input-group .ea-input-addon-append + .ea-input-addon-append {
+    padding-inline-start: var(--ea-sp-3);
+    padding-inline-end: var(--ea-sp-4);
+}
+.form-widget .ea-input-group input.form-control {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    flex: 1;
+    min-inline-size: 0;
+    block-size: 28px;
+}
+.form-widget .ea-input-group input.form-control:focus {
+    border: none;
+    box-shadow: none;
+    outline: 0;
+}
+/* validation errors are displayed on the whole group, not on the inner input */
+.has-error .form-widget .ea-input-group {
+    border-color: var(--form-input-error-border-color);
+    box-shadow: var(--form-input-error-shadow);
+}
+.has-error .form-widget .ea-input-group input.form-control,
+.has-error .form-widget .ea-input-group input.form-control:focus,
+.form-widget .ea-input-group input.form-control.is-invalid {
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+.form-widget .ea-input-group.ea-input-group-disabled {
+    background-color: var(--form-control-disabled-bg);
+    box-shadow: none;
+}
+.form-widget .ea-input-group.ea-input-group-disabled .ea-input-addon {
+    color: var(--form-control-disabled-color);
+}
+/* the slug field renders a lock/unlock button as an interactive addon inside the group */
+.form-widget .ea-input-group .ea-input-addon-button {
+    align-self: stretch;
+    background: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: inherit;
+    justify-content: center;
+    line-height: var(--line-height-none);
+    min-inline-size: 28px;
+    padding: 0 var(--ea-sp-3);
+    transition: background-color var(--ea-duration-fast) var(--ea-ease-in), color var(--ea-duration-fast)
+        var(--ea-ease-in);
+}
+/* round the outer corners only when the button is the last element of the group
+   (a field can define append addons rendered after it) */
+.form-widget .ea-input-group .ea-input-addon-button:last-child {
+    border-start-end-radius: calc(var(--border-radius) - var(--border-width));
+    border-end-end-radius: calc(var(--border-radius) - var(--border-width));
+}
+.form-widget .ea-input-group .ea-input-addon-button:not(:disabled):hover {
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+}
+/* the group already shows a ring on ':focus-within'; this makes the focused element
+   itself visible for keyboard users (offset keeps the ring inside the group border) */
+.form-widget .ea-input-group .ea-input-addon-button:not(:disabled):focus-visible {
+    outline: var(--ea-focus-ring-width) solid var(--button-focus-outline-color);
+    outline-offset: -3px;
+}
+.form-widget .ea-input-group .ea-input-addon-button:disabled {
+    color: var(--form-control-disabled-color);
+    cursor: not-allowed;
+}
+/* while the slug is locked, its input is readonly: display the whole group as read-only
+   (the inner input is transparent, so the disabled background must be set on the group) */
+.form-widget .ea-input-group:has(input[data-ea-slug-field][readonly]) {
+    background-color: var(--form-control-disabled-bg);
+}
+
+/* fileupload widgets */
+.ea-fileupload {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ea-sp-4);
+}
+
+/* File Upload - Toolbar (Add button + Clear All) */
+.ea-fileupload-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--ea-sp-6);
+}
+.ea-fileupload-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ea-sp-3);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    padding: var(--ea-sp-3) var(--ea-sp-7);
+}
+.ea-fileupload-add-btn .btn-icon {
+    inline-size: var(--ea-sp-7);
+    block-size: var(--ea-sp-7);
+}
+.ea-fileupload-clear-all-btn {
+    margin-inline-start: auto;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    padding: var(--ea-sp-3) 0;
+}
+.ea-fileupload-clear-all-btn:hover {
+    text-decoration: underline;
+}
+
+/* File Upload - Cards container */
+.ea-fileupload-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ea-sp-3);
+}
+.ea-fileupload-cards:empty {
+    display: none;
+}
+
+/* File Upload - Individual card */
+.ea-fileupload-card {
+    display: flex;
+    align-items: center;
+    gap: var(--ea-sp-5);
+    border: var(--border-width) solid var(--border-tertiary-color);
+    border-radius: var(--border-radius);
+    padding: var(--ea-sp-4) var(--ea-sp-6);
+}
+
+/* File Upload - Card preview (left side: icon or thumbnail) */
+.ea-fileupload-card-preview {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--ea-sp-18);
+    block-size: var(--ea-sp-18);
+}
+.ea-fileupload-card-thumbnail {
+    inline-size: var(--ea-sp-18);
+    block-size: var(--ea-sp-18);
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+}
+.ea-fileupload-card .ea-fileupload-card-icon {
+    inline-size: var(--ea-sp-16);
+    block-size: var(--ea-sp-16);
+}
+.ea-fileupload-card .ea-fileupload-card-icon svg {
+    inline-size: 100%;
+    block-size: 100%;
+    max-inline-size: unset;
+    max-block-size: unset;
+}
+
+/* File Upload - Card info (center: name + size) */
+.ea-fileupload-card-info {
+    flex: 1;
+    inline-size: 0;
+    display: flex;
+    flex-direction: column;
+}
+.ea-fileupload-card-name {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-tight);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+.ea-fileupload-card-size {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-tight);
+    color: var(--text-secondary-color);
+}
+
+/* File Upload - Card actions (right side) */
+.ea-fileupload-card-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.ea-fileupload-card-actions .ea-fileupload-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-secondary-color);
+    cursor: pointer;
+    padding: 0.5em;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    line-height: var(--line-height-none);
+}
+.ea-fileupload-card-actions .ea-fileupload-action-btn:hover {
+    color: var(--text-color);
+    background-color: var(--secondary-bg);
+}
+.ea-fileupload-card-actions .ea-fileupload-action-btn .icon {
+    inline-size: 1.125em;
+    block-size: 1.125em;
+}
+.ea-fileupload-card-actions .ea-fileupload-action-btn svg {
+    inline-size: 100%;
+    block-size: 100%;
+    max-inline-size: unset;
+    max-block-size: unset;
+}
+
+/* Image/file vich uploads */
+.ea-vich-image img {
+    box-shadow: 0 0 0 4px var(--white), 0px 0px 4px 3px var(--gray-600);
+    margin: var(--ea-sp-3) var(--ea-sp-2) var(--ea-sp-6);
+    max-block-size: 300px;
+    max-inline-size: 100%;
+}
+
+.ea-vich-file-name {
+    display: block;
+    margin: var(--ea-sp-2) 0 var(--ea-sp-4);
+}
+
+.ea-vich-file-name .fa {
+    font-size: var(--icon-size-md);
+}
+
+/* this element should use 'display: flex', but that doesn't work with
+   the CSS trick used to customize the <input type="file" /> fields. */
+
+.ea-vich-image-actions > div,
+.ea-vich-file-actions > div {
+    float: left;
+    margin-inline-end: var(--ea-sp-2);
+}
+
+.ea-vich-image-actions:after,
+.ea-vich-file-actions:after {
+    clear: left;
+    content: "";
+    display: block;
+}
+
+.ea-vich-image-actions .field-checkbox,
+.ea-vich-file-actions .field-checkbox {
+    padding-block-start: var(--ea-sp-2);
+}
+
+.ea-vich-image-actions .form-widget {
+    flex-basis: 100%;
+}
+
+/* This CSS trick allows to customize the <input type="file" /> field entirely
+   as explained in https://gist.github.com/barneycarroll/5244258 */
+.input-file-container {
+    overflow: hidden;
+    position: relative;
+}
+
+.input-file-container [type="file"] {
+    cursor: inherit;
+    display: block;
+    font-size: 999px; /* hides the native file input text without hiding the control */
+    filter: opacity(0);
+    min-block-size: 100%;
+    min-inline-size: 100%;
+    opacity: 0;
+    position: absolute;
+    inset-inline-end: 0;
+    text-align: right;
+    inset-block-start: 0;
+}
