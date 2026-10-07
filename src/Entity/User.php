@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -47,10 +50,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Column(type: 'datetime_immutable', nullable: false)]
     private ?\DateTimeImmutable $updatedAt;
 
+    /** @var Collection<int, Event> */
+    #[OneToMany(mappedBy: 'organizer', targetEntity: Event::class)]
+    private Collection $events;
+
+    /** @var Collection<int, Registration> */
+    #[OneToMany(mappedBy: 'user', targetEntity: Registration::class)]
+    private Collection $registrations;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->events = new ArrayCollection();
+        $this->registrations = new ArrayCollection();
     }
 
     /**
@@ -173,6 +186,56 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): static
+    {
+        if (! $this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        $this->events->removeElement($event);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Registration>
+     */
+    public function getRegistrations(): Collection
+    {
+        return $this->registrations;
+    }
+
+    public function addRegistration(Registration $registration): static
+    {
+        if (! $this->registrations->contains($registration)) {
+            $this->registrations->add($registration);
+            $registration->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistration(Registration $registration): static
+    {
+        $this->registrations->removeElement($registration);
+
+        return $this;
     }
 
     public function eraseCredentials(): void

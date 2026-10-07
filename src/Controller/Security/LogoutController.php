@@ -9,6 +9,6 @@ class LogoutController
 {
     public function __invoke()
     {
-        
+
     }
 }
