@@ -27,7 +27,7 @@ class RegisterUserController
             $user->setPlainPassword(null);
             $userRepository->persistandsave($user);
         }
-        return new Response($twig->render('user/register.html.twig', [
+        return new Response($twig->render('user/newEvent.html.twig', [
             'form' => $form->createView(),
         ]), Response::HTTP_OK);
     }

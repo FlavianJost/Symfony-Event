@@ -34,6 +34,7 @@
                             <li class="mb-2">🗓 <strong>Du</strong> {{ event.startAt|date('d/m/Y H:i') }}</li>
                             <li class="mb-2">🗓 <strong>Au</strong> {{ event.endAt|date('d/m/Y H:i') }}</li>
                             <li class="mb-2">👥 <strong>Capacité :</strong> {{ event.capacity }} places</li>
+                            <li class="mb-2">📝 <strong>Inscrits :</strong> {{ registrationsCount }} / {{ event.capacity }}</li>
                             {% if event.organizer %}
                                 <li class="mb-2">👤 <strong>Organisé par :</strong> {{ event.organizer.email }}</li>
                             {% endif %}
