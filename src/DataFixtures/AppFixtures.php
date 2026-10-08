@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
     {
         $admin = $this->user($manager, 'admin', 'admin@example.com', 'password123', ['ROLE_ADMIN']);
         $organiser = $this->user($manager, 'organiser', 'organiser@example.com', 'password123', ['ROLE_ORGANISER']);
-        $flavianj = $this->user($manager, 'flavianj', 'fjost@example.com', 'password123', ['ROLE_USER', 'ROLE_ADMIN']);
+        $flavianj = $this->user($manager, 'flavianj', 'fjost@example.com', 'password123', ['ROLE_ADMIN']);
         $user = $this->user($manager, 'user', 'user@example.com', 'password123', ['ROLE_USER']);
 
         $category1 = $this->Category($manager, 'Category 1');
@@ -81,8 +81,7 @@ class AppFixtures extends Fixture
 
     private function slugify(string $value): string
     {
-        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $value), '-'));
-        return $slug . '-' . uniqid();
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $value), '-'));
     }
 
     private function Registration(ObjectManager $manager, User $user, Event $event): Registration

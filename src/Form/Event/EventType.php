@@ -33,16 +33,7 @@ class EventType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
-            ])
-        ;
-
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
-            $data = $event->getData();
-            if (is_array($data) && isset($data['title']) && is_string($data['title']) && '' !== trim($data['title'])) {
-                $data['slug'] = self::slugify($data['title']);
-                $event->setData($data);
-            }
-        });
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -50,10 +41,5 @@ class EventType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Event::class,
         ]);
-    }
-
-    private static function slugify(string $value): string
-    {
-        return strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $value), '-')) . '-' . uniqid();
     }
 }

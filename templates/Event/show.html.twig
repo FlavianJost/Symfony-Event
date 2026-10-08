@@ -5,6 +5,9 @@
 {% block body %}
     <div class="container mt-5">
         <a href="{{ path('all_events') }}" class="btn btn-link pl-0">← Retour aux événements</a>
+        {% if app.user and (is_granted('ROLE_ADMIN') or (event.organizer and event.organizer.id == app.user.id )) %}
+            <a href="{{ path('edit_events', {'slug': event.slug}) }}" class="btn btn-link float-right">✏️ Modifier</a>
+        {% endif %}
 
         <div class="card border-0 shadow-sm">
             {% if event.coverImage %}
@@ -41,6 +44,9 @@
                         </ul>
                     </div>
                 </div>
+                {% if app.user and not registered %}
+                    <a href="{{ path('event_register', {'slug': event.slug}) }}" >Register</a>
+                {% endif %}
             </div>
         </div>
     </div>
