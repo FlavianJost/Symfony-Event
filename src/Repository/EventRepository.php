@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Event;
+use App\Entity\User;
 use App\Enum\EventStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -45,6 +46,15 @@ class EventRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('e')
             ->andWhere('e.status=:status')
             ->setParameter('status', EventStatus::Published)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findEventByOrganizer(User $organizer): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.organizer=:organizer')
+            ->setParameter('organizer', $organizer)
             ->getQuery()
             ->getResult();
     }

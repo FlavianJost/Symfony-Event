@@ -43,7 +43,12 @@
                                         <li>Organisé par {{ event.organizer.email }}</li>
                                     {% endif %}
                                 </ul>
-                                <a href="{{ path('event_show', {'slug': event.slug}) }}">Détails →</a>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="{{ path('event_show', {'slug': event.slug}) }}">Détails →</a>
+                                    {% if app.user and (is_granted('ROLE_ADMIN') or (event.organizer and event.organizer.id == app.user.id )) %}
+                                        <a href="{{ path('edit_events', {'slug': event.slug}) }}">✏️ Modifier</a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>

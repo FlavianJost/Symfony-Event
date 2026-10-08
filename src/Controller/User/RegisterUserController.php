@@ -28,7 +28,7 @@ class RegisterUserController
             $userRepository->persistandsave($user);
         }
         return new Response($twig->render('user/register.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]), Response::HTTP_OK);
     }
 }
