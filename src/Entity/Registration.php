@@ -38,6 +38,15 @@ class Registration
         $this->createdAt = new \DateTimeImmutable();
     }
 
+    public function __toString(): string
+    {
+        return sprintf(
+            '%s - %s',
+            $this->user?->getUsername(),
+            $this->event?->getTitle()
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

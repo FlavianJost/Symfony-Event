@@ -35,8 +35,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Column(type: 'string', length: 255, nullable: false)]
     private string $password;
 
-    private ?string $plainPassword = null;
-
     #[Column(type: 'json')]
     #[Assert\NotBlank]
     private array $roles = ["ROLE_USER"];
@@ -54,6 +52,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    public function __toString(): string
+    {
+        return $this->username;
     }
 
     /**
@@ -110,16 +113,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
-    }
-
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(?string $plainPassword): void
-    {
-        $this->plainPassword = $plainPassword;
     }
 
     /**

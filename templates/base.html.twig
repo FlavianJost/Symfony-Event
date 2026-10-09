@@ -42,7 +42,7 @@
                             <li class="nav-item">
                                 <a class="nav-link mb-0" href="{{ path('organizer') }}">Organizer</a>
                             </li>
-                        {% else %}
+                        {% elseif is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
                                 <a class="nav-link mb-0" href="{{ path('organizer') }}">Organizer</a>
                             </li>

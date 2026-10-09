@@ -23,9 +23,9 @@ class RegisterUserController
         $form = $formFactory->create(UserType::class, $user);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            $user->setPassword($userPasswordHasher->hashPassword($user, $user->getPlainPassword()));
-            $user->setPlainPassword(null);
+            $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('password')->getData()));
             $userRepository->persistandsave($user);
+            $this->addFlash('success', 'User registered successfully');
         }
         return new Response($twig->render('user/register.html.twig', [
             'form' => $form->createView()
