@@ -10,6 +10,10 @@
                 body {
                     background-color: #f1f5f9 !important;
                 }
+                body.login,
+                body.register {
+                    overflow-y: hidden;
+                }
             </style>
         {% endblock %}
 
@@ -24,7 +28,7 @@
         <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
     </head>
-    <body>
+    <body class="{% block body_class %}{% endblock %}">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ path('homepage') }}">🎉 EventHub</a>

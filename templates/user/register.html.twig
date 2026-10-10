@@ -1,39 +1,113 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ parent() }}Inscription{% endblock %}
+{% block title %}{{ parent() }} Inscription{% endblock %}
+
+{% block body_class %}register{% endblock %}
 
 {% block body %}
-    <div class="auth-container">
-        <h2>Rejoignez-nous</h2>
+    <div class="min-vh-100 d-flex justify-content-center bg-light pt-5 register-page">
 
-        {{ form_start(form, {'attr': {'class': 'form-signup'}}) }}
+        <div class="w-100" style="max-width: 450px;">
 
-        {# Affichage des erreurs globales #}
-        {{ form_errors(form) }}
+            <div class="text-center mb-5">
 
-        <div class="form-group">
-            {{ form_label(form.username, 'Username') }}
-            {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.username) }}
+                <h1 class="fw-bold">
+                    Créer un compte
+                </h1>
+
+            </div>
+
+            {{ form_start(form) }}
+
+            {{ form_errors(form) }}
+
+            <div class="mb-4">
+
+                <label
+                    for="{{ form.username.vars.id }}"
+                    class="form-label fw-semibold"
+                >
+                    Nom d'utilisateur
+                </label>
+
+                {{ form_widget(form.username, {
+                    attr: {
+                        class: 'form-control py-3',
+                        placeholder: 'Votre pseudo'
+                    }
+                }) }}
+
+                {{ form_errors(form.username) }}
+
+            </div>
+
+            <div class="mb-4">
+
+                <label
+                    for="{{ form.email.vars.id }}"
+                    class="form-label fw-semibold"
+                >
+                    Adresse email
+                </label>
+
+                {{ form_widget(form.email, {
+                    attr: {
+                        class: 'form-control py-3',
+                        placeholder: 'prenom.nom@exemple.fr'
+                    }
+                }) }}
+
+                {{ form_errors(form.email) }}
+
+            </div>
+
+            <div class="mb-4">
+
+                <label
+                    for="{{ form.password.vars.id }}"
+                    class="form-label fw-semibold"
+                >
+                    Mot de passe
+                </label>
+
+                {{ form_widget(form.password, {
+                    attr: {
+                        class: 'form-control py-3',
+                        placeholder: 'Votre mot de passe'
+                    }
+                }) }}
+
+                {{ form_errors(form.password) }}
+
+            </div>
+
+            <div class="d-flex justify-content-center gap-3">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary fw-semibold"
+                    style="
+                        height: 48px;
+                        min-width: 170px;
+                        border-radius: 30px;
+                    "
+                >
+                    Créer un compte
+                </button>
+
+                <a
+                    class="btn btn-primary fw-semibold d-inline-flex align-items-center justify-content-center"
+                    style="border-radius: 30px;height: 48px; min-width: 150px; margin-left: 30px"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+
+            {{ form_end(form) }}
+
         </div>
 
-        {# Champ Email #}
-        <div class="form-group">
-            {{ form_label(form.email, 'Adresse e-mail') }}
-            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'exemple@mail.com'}}) }}
-            {{ form_errors(form.email) }}
-        </div>
-
-        {# Champ Mot de passe #}
-        <div class="form-group">
-            {{ form_label(form.password, 'Mot de passe') }}
-            {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.password) }}
-        </div>
-
-
-        <button type="submit" class="btn btn-primary">Créer mon compte</button>
-
-        {{ form_end(form) }}
     </div>
+
 {% endblock %}

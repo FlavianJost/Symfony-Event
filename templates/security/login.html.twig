@@ -1,28 +1,90 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Connexion{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
 {% block body %}
-    <div class="container mt-5">
-        <h1>Connexion</h1>
+    <div class="min-vh-100 d-flex justify-content-center bg-light pt-5 login-page">
 
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+        <div class="w-100" style="max-width: 450px;">
 
-        <form action="{{ path('app_login') }}" method="post">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="text" value="{{ last_username }}" name="email" id="email" class="form-control" autocomplete="email" required autofocus>
+            <div class="text-center mb-5">
+
+                <h1 class="fw-bold">
+                    Connexion à Full Project
+                </h1>
+
             </div>
 
-            <div class="mb-3">
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" name="password" id="password" class="form-control" autocomplete="current-password" required>
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            <div class="mb-4">
+
+                <label
+                    for="email"
+                    class="form-label fw-semibold"
+                >
+                    Adresse email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ last_username }}"
+                    class="form-control py-3"
+                    placeholder="prenom.nom@exemple.fr"
+                    autocomplete="email"
+                    required
+                    autofocus
+                >
+
             </div>
 
-            {# Jeton CSRF pour la sécurité #}
-            <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+            <div class="mb-4">
 
-            <button type="submit" class="btn btn-primary">Se connecter</button>
-        </form>
+                <label
+                    for="password"
+                    class="form-label fw-semibold"
+                >
+                    Mot de passe
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control py-3"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <input
+                type="hidden"
+                name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+
+            <div class="text-center">
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100 fw-semibold"
+                    style="height: 48px; border-radius: 30px; max-width: 150px"
+                >
+                    Se connecter
+                </button>
+                <a class="btn btn-primary fw-semibold d-inline-flex align-items-center justify-content-center"
+                   style="border-radius: 30px;height: 48px;margin-left: 20px; min-width: 150px"
+                   href="{{ path('app_register') }}">Créer un compte</a>
+            </div>
+        </div>
     </div>
+
 {% endblock %}
