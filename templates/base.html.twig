@@ -42,16 +42,16 @@
                         <li class="nav-item">
                             <a class="nav-link mb-0" href="{{ path('event_list_registered') }}">Registration List</a>
                         </li>
-                        {% if is_granted('ROLE_ORGANISER') %}
-                            <li class="nav-item">
-                                <a class="nav-link mb-0" href="{{ path('organizer') }}">Organizer</a>
-                            </li>
-                        {% elseif is_granted('ROLE_ADMIN') %}
+                        {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
                                 <a class="nav-link mb-0" href="{{ path('organizer') }}">Organizer</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0" href="{{ path('admin') }}">Admin</a>
+                            </li>
+                        {% elseif is_granted('ROLE_ORGANISER')  %}
+                            <li class="nav-item">
+                                <a class="nav-link mb-0" href="{{ path('organizer') }}">Organizer</a>
                             </li>
                         {% endif %}
                         <li class="nav-item">

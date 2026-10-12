@@ -44,7 +44,7 @@
                         </ul>
                     </div>
                 </div>
-                {% if app.user and not registered %}
+                {% if not registered %}
                     <a href="{{ path('event_register', {'slug': event.slug}) }}" >Register</a>
                 {% endif %}
             </div>

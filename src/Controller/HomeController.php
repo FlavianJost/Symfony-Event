@@ -15,7 +15,6 @@ class HomeController
 {
     public function __invoke(Environment $twig, EventRepository $event) : Response
     {
-        $name = "test";
         return new Response($twig->render('home.html.twig',[
             'events' => $event->findEventPublished()
         ]),Response::HTTP_OK);
