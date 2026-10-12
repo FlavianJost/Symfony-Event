@@ -5,6 +5,9 @@
 {% block body %}
     <div class="container mt-5">
         <h1 class="mb-4">Tous les événements</h1>
+        {% if app.user and (is_granted('ROLE_ADMIN') or (is_granted('ROLE_ORGANISER'))) %}
+            <a href="{{ path('event_new') }}">Creer un Evénement</a>
+        {% endif %}
 
         {% if events is empty %}
             <div class="card border-0 shadow-sm">

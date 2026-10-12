@@ -25,12 +25,16 @@ class ShowEventController
             throw new NotFoundHttpException(sprintf('Event "%s" not found', $slug));
         }
 
-
+        if ($user) {
+            $registered = in_array($found, $registration->findEventsByUser($user), true) ?? '';
+        } else {
+            $registered = '';
+        }
 
         return new Response($twig->render('Event/show.html.twig',[
             'event' => $found,
             'registrationsCount' => $registration->countConfirmedByEvent($found),
-            'registered' => in_array($found, $registration->findEventsByUser($user), true)
+            'registered' => $registered
         ]),Response::HTTP_OK);
     }
 }

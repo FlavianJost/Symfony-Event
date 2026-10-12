@@ -36,7 +36,7 @@ class UserType extends AbstractType
                     ])
                 ]
             ])
-            ->add('plainPassword', PasswordType::class,[
+            ->add('password', PasswordType::class,[
                 'label' => 'Password',
                 'constraints' => [
                     new NotBlank([

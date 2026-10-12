@@ -64,6 +64,7 @@ class EditEventController
 
         return new Response($twig->render('Event/form.html.twig', [
             'form' => $form->createView(),
+            'event' => $event
         ]), Response::HTTP_OK);
     }
 }

@@ -15,7 +15,7 @@ use Twig\Environment;
 #[IsGranted('IS_AUTHENTICATED_FULLY')]
 class UserProfileController
 {
-    public function __invoke(Request $request,Environment $twig, FormFactoryInterface $formFactory, #[CurrentUser] User $user) : Response
+    public function __invoke(Request $request,Environment $twig, #[CurrentUser] User $user) : Response
     {
         return new Response($twig->render('user/profile.html.twig', [
             'user' => $user
