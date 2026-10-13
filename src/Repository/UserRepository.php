@@ -13,7 +13,7 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function save(?User $user = null): void
+    public function save(): void
     {
         $this->getEntityManager()->flush();
     }
@@ -26,6 +26,6 @@ class UserRepository extends ServiceEntityRepository
     public function persistandsave(?User $user = null): void
     {
         $this->persist($user);
-        $this->save($user);
+        $this->save();
     }
 }

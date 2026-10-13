@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -34,6 +35,10 @@ class EventCrudController extends AbstractCrudController
         yield TextField::new('title')->setRequired(true);
         yield TextField::new('slug')->onlyOnIndex();
         yield TextField::new('description')->setRequired(true);
+        yield ImageField::new('coverImage')->setRequired(false)
+            ->onlyOnForms()
+            ->setUploadDir('public/uploads/events')
+            ->setBasePath('uploads/events');
         yield DateField::new('start_at')->setRequired(true);
         yield DateField::new('end_at')->setRequired(true);
         yield IntegerField::new('capacity')->setRequired(true);

@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Form\Event\EventType;
 use App\Repository\EventRepository;
+use App\Service\EventCoverImageUploader;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,7 +26,7 @@ class NewEventController
 {
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[IsGranted( new Expression('is_granted("ROLE_ADMIN") or is_granted("ROLE_ORGANISER")'))]
-    public function __invoke(Request $request, Environment $twig, FormFactoryInterface $formFactory, EventRepository $eventRepository, UrlGeneratorInterface $urlGenerator, #[CurrentUser] ?User $user = null, SluggerInterface $slugger): Response
+    public function __invoke(Request $request, Environment $twig, FormFactoryInterface $formFactory, EventRepository $eventRepository, UrlGeneratorInterface $urlGenerator, #[CurrentUser] ?User $user = null, SluggerInterface $slugger, EventCoverImageUploader $coverImageUploader): Response
     {
         $event = new Event();
         $event->setSlug("none");
@@ -38,6 +39,7 @@ class NewEventController
                 $slug = strtolower($slugger->slug($event->getTitle())->toString());
                 $event->setSlug($slug);
                 $event->setOrganizer($user);
+                $coverImageUploader->upload($form->get('coverImage')->getData(), $event);
                 $eventRepository->saveandpersist($event);
                 return new RedirectResponse($urlGenerator->generate('event_show', [
                     'slug' => $slug,

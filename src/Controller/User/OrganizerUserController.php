@@ -24,7 +24,8 @@ class OrganizerUserController
             $events = $event->findAll();
         }else {$events = $event->findEventByOrganizer($user);}
         return new Response($twig->render('Event/events.html.twig',[
-            'events' => $events
+            'events' => $events,
+            'organizer' => true
         ]));
     }
 }

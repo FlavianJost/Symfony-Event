@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Form\Event\EventType;
 use App\Repository\EventRepository;
+use App\Service\EventCoverImageUploader;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -27,7 +28,7 @@ use Twig\Environment;
 #[IsGranted( new Expression('is_granted("ROLE_ADMIN") or is_granted("ROLE_ORGANISER")'))]
 class EditEventController
 {
-    public function __invoke(string $slug, Request $request, Environment $twig, EventRepository $eventRepository, FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator, #[CurrentUser] ?User $user = null, SluggerInterface $slugger) : Response
+    public function __invoke(string $slug, Request $request, Environment $twig, EventRepository $eventRepository, FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator, #[CurrentUser] ?User $user = null, SluggerInterface $slugger, EventCoverImageUploader $coverImageUploader) : Response
     {
         $event = $eventRepository->findOneBy(['slug' => $slug]);
         if (!$event instanceof Event) {
@@ -53,6 +54,7 @@ class EditEventController
                 if ($oldTitle !== $event->getTitle()) {
                     $event->setSlug(strtolower($slugger->slug($event->getTitle())->toString()));
                 }
+                $coverImageUploader->upload($form->get('coverImage')->getData(), $event);
                 $eventRepository->saveandpersist($event);
                 return new RedirectResponse($urlGenerator->generate('event_show', [
                     'slug' => $event->getSlug(),

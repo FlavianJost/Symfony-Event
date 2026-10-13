@@ -953,6 +953,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'symfony/phpunit-bridge' => array(
+            'pretty_version' => 'v8.1.6',
+            'version' => '8.1.6.0',
+            'reference' => 'abd3c4e35f06f98bc6e5e07c81f948bc77cd39bd',
+            'type' => 'symfony-bridge',
+            'install_path' => __DIR__ . '/../symfony/phpunit-bridge',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'symfony/polyfill-ctype' => array(
             'dev_requirement' => false,
             'replaced' => array(
