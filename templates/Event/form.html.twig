@@ -43,6 +43,12 @@
                             {{ form_errors(form.description) }}
                         </div>
 
+                        <div class="form-group" {{ stimulus_controller('coverimage') }}>
+                            {{ form_label(form.coverImage, 'Image de couverture') }}
+                            {{ form_widget(form.coverImage, {'attr': {'class': 'form-control','accept': 'image/*', 'data-coverimage-target': 'input', 'data-event-cover': event.coverImage|default('') }}) }}
+                            {{ form_errors(form.coverImage) }}
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 {{ form_label(form.startAt, 'Date de début') }}

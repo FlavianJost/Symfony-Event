@@ -1,10 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | Tous les événements{% endblock %}
+{% block title %}
+    {% if organizer is defined %}
+        Tous vos événements
+    {% elseif registered is defined %}
+        Toutes vos inscriptions
+    {% else %}
+        Tous les événements
+    {% endif %}
+{% endblock %}
 
 {% block body %}
     <div class="container mt-5">
-        <h1 class="mb-4">Tous les événements</h1>
+        {% if organizer is defined %}
+            <h1 class="mb-4">Tous vos événements</h1>
+        {% elseif registered is defined %}
+            <h1 class="mb-4">Toutes vos inscriptions</h1>
+        {% else %}
+            <h1 class="mb-4">Tous les événements</h1>
+        {% endif %}
         {% if app.user and (is_granted('ROLE_ADMIN') or (is_granted('ROLE_ORGANISER'))) %}
             <a href="{{ path('event_new') }}">Creer un Evénement</a>
         {% endif %}
@@ -18,12 +32,15 @@
         {% else %}
             <div class="row">
                 {% for event in events %}
+                    {% set registered = registrations[event.id] ?? null %}
                     <div class="col-md-6 mb-4">
-                        <div class="card border-0 shadow-sm h-100">
-                            {% if event.coverImage %}
-                                <img src="{{ event.coverImage }}" class="card-img-top" alt="{{ event.title }}">
-                            {% endif %}
-                            <div class="card-body">
+                            <div class="card border-0 shadow-sm h-100">
+                                {% if event.coverImage %}
+                                    <img src="{{ asset('uploads/events/' ~ event.coverImage) }}" class="card-img-top object-fit-cover" alt="{{ event.title }}" style="height: 225px;">
+                                {% else %}
+                                    <img src="{{ asset('images/default.jpg') }}" class="card-img-top object-fit-cover" alt="{{ event.title }}" style="height: 225px;">
+                                {% endif %}
+                                <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <h5 class="card-title mb-0">{{ event.title }}</h5>
                                     <span class="badge badge-{% if event.status.value == 'published' %}success{% elseif event.status.value == 'cancelled' %}danger{% else %}secondary{% endif %}">
@@ -52,6 +69,13 @@
                                         <a href="{{ path('edit_events', {'slug': event.slug}) }}">✏️ Modifier</a>
                                     {% endif %}
                                 </div>
+                                {% if registered is defined and registered is not null %}
+                                    {% if (registered is defined and registered.status.value == 'confirmed') %}
+                                        <a href="{{ path('event_cancel_registered', {'slug': event.slug}) }}" style="color: red;">Cancel</a>
+                                    {% elseif (registered is defined and registered.status.value == 'cancelled') %}
+                                        <a href="{{ path('event_register', {'slug': event.slug}) }}" style="color: green;">Confirmed</a>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </div>
                     </div>

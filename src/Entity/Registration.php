@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Enum\RegistrationStatus;
 use App\Repository\RegistrationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RegistrationRepository::class)]
@@ -14,7 +15,7 @@ class Registration
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\ManyToOne]
@@ -31,7 +32,7 @@ class Registration
     private RegistrationStatus $status = RegistrationStatus::Confirmed;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt;
 
     public function __construct()
     {

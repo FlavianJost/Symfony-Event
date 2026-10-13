@@ -31,17 +31,16 @@ class RegistrationRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function findEventsByUser(User $user): array
+    public function findRegistrationByUser(User $user): array
     {
-        $registrations = $this->createQueryBuilder('r')
+        return $this->createQueryBuilder('r')
             ->andWhere('r.user = :user')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();
-        return array_map(fn(Registration $registration) => $registration->getEvent(), $registrations);
     }
 
-    public function save(?Registration $registration): void
+    public function save(): void
     {
         $this->getEntityManager()->flush();
     }
@@ -53,7 +52,7 @@ class RegistrationRepository extends ServiceEntityRepository
 
     public function persistandsave(Registration $registration): void
     {
-        $this->save($registration);
         $this->persist($registration);
+        $this->save();
     }
 }

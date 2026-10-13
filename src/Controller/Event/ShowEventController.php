@@ -17,7 +17,7 @@ use Twig\Environment;
 #[Route(path: '/events/{slug}', name: 'event_show', methods: ['GET'])]
 class ShowEventController
 {
-    public function __invoke(string $slug, Environment $twig, EventRepository $event, RegistrationRepository $registration, #[CurrentUser] ?User $user) : Response
+    public function __invoke(string $slug, Environment $twig, EventRepository $event, RegistrationRepository $registrationRepository, #[CurrentUser] ?User $user) : Response
     {
         $found = $event->findOneBy(['slug' => $slug]);
 
@@ -26,14 +26,14 @@ class ShowEventController
         }
 
         if ($user) {
-            $registered = in_array($found, $registration->findEventsByUser($user), true) ?? '';
+            $registered = $registrationRepository->findOneBy(['user' => $user, 'event' => $found]);
         } else {
             $registered = '';
         }
 
         return new Response($twig->render('Event/show.html.twig',[
             'event' => $found,
-            'registrationsCount' => $registration->countConfirmedByEvent($found),
+            'registrationsCount' => $registrationRepository->countConfirmedByEvent($found),
             'registered' => $registered
         ]),Response::HTTP_OK);
     }

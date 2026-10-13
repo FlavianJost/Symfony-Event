@@ -18,8 +18,14 @@ class ListRegistrationController
 {
     public function __invoke(Environment $twig, RegistrationRepository $registrationRepository, #[CurrentUser] ?User $user = null) : Response
     {
+        $registrations = [];$events = [];
+        foreach ($registrationRepository->findRegistrationByUser($user) as $registration){
+            $events[$registration->getEvent()->getId()] = $registration->getEvent();
+            $registrations[$registration->getEvent()->getId()] = $registration;
+        }
         return new Response($twig->render('Event/events.html.twig', [
-            'events' => $registrationRepository->findEventsByUser($user) ?? []
+            'events' => $events ?? [],
+            'registrations' => $registrations
         ]), Response::HTTP_OK);
     }
 }

@@ -6,11 +6,13 @@ use App\Entity\Category;
 use App\Entity\Event;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 
 class EventType extends AbstractType
 {
@@ -19,6 +21,19 @@ class EventType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
+            ->add('coverImage', FileType::class, [
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '2M',
+                        'mimeTypesMessage' => 'Le fichier doit être une image valide.',
+                    ]),
+                ],
+                'attr' => [
+                    'data-current-image' => true,
+                ],
+            ])
             ->add('startAt', null, [
                 'widget' => 'single_text'
             ])
